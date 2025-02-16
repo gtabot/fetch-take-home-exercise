@@ -16,7 +16,7 @@ class SentenceTransformer(pl.LightningModule):
         self.model = AutoModel.from_pretrained(model_name)
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-    def forward(self, text: str) -> torch.Tensor:
+    def forward(self, text: str | list[str]) -> torch.Tensor:
         inputs = self.tokenizer(
             text,
             return_tensors="pt",
