@@ -1,0 +1,15 @@
+[project]
+name = "gtabot-fetch-take-home-exercise"
+version = "2025.02.17"
+authors = [
+    { name = "Gregg Tabot" },
+]
+description = "Machine Learning Engineer Take Home Exercise"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "torch",
+    "pytorch-lightning",
+    "transformers",
+    "datasets",
+]
