@@ -1,0 +1,75 @@
+
+Sentence: I absolutely love this new restaurant, the food is amazing!
+Category: imperative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: The customer service was terrible and I'll never shop here again.
+Category: declarative
+Sentiment: negative
+--------------------------------------------------------------------------------
+
+Sentence: This movie was a complete waste of time and money.
+Category: declarative
+Sentiment: negative
+--------------------------------------------------------------------------------
+
+Sentence: The weather today is perfect for a picnic in the park.
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: Breaking news: Major tech company announces layoffs amid economic downturn.
+Category: declarative
+Sentiment: neutral
+--------------------------------------------------------------------------------
+
+Sentence: Scientists discover promising new treatment for cancer patients.
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: The new smartphone features impressive battery life and camera quality.
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: Climate change continues to impact global weather patterns.
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: The local school board voted to increase education funding.
+Category: declarative
+Sentiment: neutral
+--------------------------------------------------------------------------------
+
+Sentence: This recipe for chocolate cake turned out perfectly delicious.
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: The traffic during rush hour is getting worse every day.
+Category: declarative
+Sentiment: negative
+--------------------------------------------------------------------------------
+
+Sentence: Excited to announce we're expanding our business to new locations!
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: Warning: Dangerous storm system approaching the coast.
+Category: declarative
+Sentiment: negative
+--------------------------------------------------------------------------------
+
+Sentence: The concert was incredible - the band played all their best hits!
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: Stock market reaches record highs as investor confidence grows.
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------

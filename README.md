@@ -48,6 +48,8 @@ Sentence: I absolutely love this new restaurant, the food is amazing!
 Embedding: tensor([[-1.6839e-01, -3.9668e-01,  4.2607e-01,  1.9269e-01, ...]
 ```
 
+Full output: [task_1.txt](task_1.txt)
+
 ## Task 2: Multi-Task Learning Model Implementation
 
 The file `models/multitask_transformer.py` contains the implementation of the multi-task learning model.
@@ -70,7 +72,7 @@ I use the HuggingFace dataset [Sp1786/multiclass-sentiment-analysis-dataset](htt
 
 ## Task 3: Training Considerations
 
-Discuss the implications and advantages of each scenario and explain your rationale as to how the model should be trained given the following:
+**Discuss the implications and advantages of each scenario and explain your rationale as to how the model should be trained given the following:**
 
 1. If the entire network should be frozen.
 
@@ -88,7 +90,7 @@ Discuss the implications and advantages of each scenario and explain your ration
 - Allows one class to be trained while keeping the other stable
 - Can be useful when one dataset was introduced later in time and is much smaller
 
-Consider a scenario where transfer learning can be beneficial. Explain how you would approach the transfer learning process, including:
+**Consider a scenario where transfer learning can be beneficial. Explain how you would approach the transfer learning process, including:**
 
 1. The choice of a pre-trained model.
 
@@ -115,11 +117,13 @@ The file `task_4.py` contains the implementation of the training loop.
 - The datasets are used to instantiate the multi-task learning model and determine the number of classes for each task
 - The training loop is implemented using PyTorch Lightning
   - Training will continue until the early stopping callback is triggered (no loss improvement)
-  - The final model and other checkpoints are saved in the `checkpoints` directory
+  - The final model and other checkpoints are saved in the `checkpoints` directory (ignored by `.gitignore`)
     - `final-multitask-transformer.ckpt`
     - `best-category-loss_epoch={##}_loss={#.###}.ckpt`
     - `best-sentiment-loss_epoch={##}_loss={#.###}.ckpt`
   - TensorBoard logs are saved in the `logs` directory
+
+### Training the Multi-Task Learning Model
 
 ```bash
 $ python task_4.py
@@ -147,3 +151,19 @@ LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 ## Task 5: Evaluation (BONUS)
 
 The file `task_5.py` contains evaluation for the multi-task learning model.
+
+- The model is loaded using `checkpoints/final-multitask-transformer.ckpt`
+- The sentences are loaded from `data/sentences.txt`
+- The model is used to predict the category and sentiment for each sentence
+- The results are printed to the console
+
+```bash
+$ python task_5.py
+
+Sentence: I absolutely love this new restaurant, the food is amazing!
+Category: imperative
+Sentiment: positive
+...
+```
+
+Full output: [task_5.txt](task_5.txt)
