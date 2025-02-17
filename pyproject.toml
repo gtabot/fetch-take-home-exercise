@@ -11,7 +11,7 @@ datasets = "*"
 pytorch-lightning = "*"
 tensorboard = "*"
 torch = [
-    {platform = "darwin", version = "*"},  # macOS uses CPU-only
+    {platform = "darwin", version = "*", source = "pypi"},  # macOS uses CPU-only
     {platform = "linux", version = "*", source = "torch-cuda"},
     {platform = "win32", version = "*", source = "torch-cuda"},
 ]

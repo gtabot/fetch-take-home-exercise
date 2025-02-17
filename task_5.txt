@@ -1,16 +1,26 @@
 
 Sentence: I absolutely love this new restaurant, the food is amazing!
-Category: imperative
+Category: declarative
 Sentiment: positive
 --------------------------------------------------------------------------------
 
-Sentence: The customer service was terrible and I'll never shop here again.
+Sentence: The concert was incredible - the band played all their best hits!
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: Has anyone else noticed how much cleaner the parks have become lately?
+Category: question
+Sentiment: negative
+--------------------------------------------------------------------------------
+
+Sentence: Breaking news: Major tech company announces layoffs amid economic downturn.
 Category: declarative
 Sentiment: negative
 --------------------------------------------------------------------------------
 
-Sentence: This movie was a complete waste of time and money.
-Category: declarative
+Sentence: Why do these meetings always run over their scheduled time?
+Category: question
 Sentiment: negative
 --------------------------------------------------------------------------------
 
@@ -19,28 +29,18 @@ Category: declarative
 Sentiment: positive
 --------------------------------------------------------------------------------
 
-Sentence: Breaking news: Major tech company announces layoffs amid economic downturn.
-Category: declarative
-Sentiment: neutral
+Sentence: Have you seen how beautiful the new community garden is?
+Category: imperative
+Sentiment: positive
 --------------------------------------------------------------------------------
 
 Sentence: Scientists discover promising new treatment for cancer patients.
 Category: declarative
-Sentiment: positive
+Sentiment: neutral
 --------------------------------------------------------------------------------
 
-Sentence: The new smartphone features impressive battery life and camera quality.
-Category: declarative
-Sentiment: positive
---------------------------------------------------------------------------------
-
-Sentence: Climate change continues to impact global weather patterns.
-Category: declarative
-Sentiment: positive
---------------------------------------------------------------------------------
-
-Sentence: The local school board voted to increase education funding.
-Category: declarative
+Sentence: What do you think about the recent changes to the public transportation schedule?
+Category: question
 Sentiment: neutral
 --------------------------------------------------------------------------------
 
@@ -49,27 +49,82 @@ Category: declarative
 Sentiment: positive
 --------------------------------------------------------------------------------
 
+Sentence: When will they finally fix these potholes in our neighborhood?
+Category: question
+Sentiment: neutral
+--------------------------------------------------------------------------------
+
+Sentence: The customer service was terrible and I'll never shop here again.
+Category: declarative
+Sentiment: negative
+--------------------------------------------------------------------------------
+
+Sentence: How long are we supposed to put up with this construction noise?
+Category: question
+Sentiment: neutral
+--------------------------------------------------------------------------------
+
+Sentence: Stock market reaches record highs as investor confidence grows.
+Category: declarative
+Sentiment: neutral
+--------------------------------------------------------------------------------
+
+Sentence: Could this day get any better? Everything is going perfectly!
+Category: imperative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: The new smartphone features impressive battery life and camera quality.
+Category: declarative
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: Has anyone tried that new ice cream shop downtown? I heard it's amazing!
+Category: question
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: Climate change continues to impact global weather patterns.
+Category: declarative
+Sentiment: neutral
+--------------------------------------------------------------------------------
+
+Sentence: Isn't it wonderful how the community came together for this event?
+Category: question
+Sentiment: positive
+--------------------------------------------------------------------------------
+
+Sentence: Warning: Dangerous storm system approaching the coast.
+Category: imperative
+Sentiment: neutral
+--------------------------------------------------------------------------------
+
 Sentence: The traffic during rush hour is getting worse every day.
 Category: declarative
 Sentiment: negative
 --------------------------------------------------------------------------------
 
-Sentence: Excited to announce we're expanding our business to new locations!
-Category: declarative
-Sentiment: positive
+Sentence: Why is the service at this hotel so disappointing every single time?
+Category: question
+Sentiment: negative
 --------------------------------------------------------------------------------
 
-Sentence: Warning: Dangerous storm system approaching the coast.
+Sentence: The local school board voted to increase education funding.
+Category: declarative
+Sentiment: neutral
+--------------------------------------------------------------------------------
+
+Sentence: This movie was a complete waste of time and money.
 Category: declarative
 Sentiment: negative
 --------------------------------------------------------------------------------
 
-Sentence: The concert was incredible - the band played all their best hits!
-Category: declarative
-Sentiment: positive
+Sentence: Would someone please explain why the internet is so slow today?
+Category: question
+Sentiment: negative
 --------------------------------------------------------------------------------
 
-Sentence: Stock market reaches record highs as investor confidence grows.
-Category: declarative
+Sentence: Excited to announce we're expanding our business to new locations!
+Category: imperative
 Sentiment: positive
 --------------------------------------------------------------------------------
