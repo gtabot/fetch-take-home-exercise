@@ -70,6 +70,42 @@ I use the HuggingFace dataset [Sp1786/multiclass-sentiment-analysis-dataset](htt
 
 ## Task 3: Training Considerations
 
+Discuss the implications and advantages of each scenario and explain your rationale as to how the model should be trained given the following:
+
+1. If the entire network should be frozen.
+
+- Network is not very malleable to new tasks or data
+- Useful when data to train is similar to pre-trained data
+
+2. If only the transformer backbone should be frozen.
+
+- The transformer is used as a feature extractor and is not trained
+- The task-specific heads only are trained
+- Good when pre-trained embeddings are useful for classification
+
+3. If only one of the task-specifc heads should be frozen.
+
+- Allows one class to be trained while keeping the other stable
+- Can be useful when one dataset was introduced later in time and is much smaller
+
+Consider a scenario where transfer learning can be beneficial. Explain how you would approach the transfer learning process, including:
+
+1. The choice of a pre-trained model.
+
+- Choose a popular pre-trained model that embeds text sentences into a fixed-size vector
+- The pre-trained model should be lightweight and fast
+
+2. The layers you would freeze/unfreeze.
+
+- Freeze the transformer backbone to keep the pre-trained embeddings stable
+- Unfreeze the task-specific heads to train the model from the pre-trained embeddings
+
+3. The rationale behind these choices.
+
+- This takes advantage of transfer learning by leveraging a pre-trained model that is trained on a large corpus of text
+- This also prevents the model from overfitting to the new task and allows it to generalize better to all text
+- The task-specific heads are fine-tuned on the new tasks
+
 ## Task 4: Training Loop Implementation (BONUS)
 
 The file `task_4.py` contains the implementation of the training loop.
