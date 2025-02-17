@@ -1,4 +1,5 @@
 .DS_Store
+*.ckpt
 *.egg-info/
 *.pyc
 __pycache__/
