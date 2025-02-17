@@ -9,9 +9,9 @@ class SentenceTransformer(pl.LightningModule):
     def __init__(self, model_name: str = MODEL_NAME) -> None:
         super().__init__()
         self.model_name = model_name
-        self.model = AutoModel.from_pretrained(model_name)
+        self.sentence_transformer = AutoModel.from_pretrained(model_name)
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.embedding_length = self.model.config.hidden_size
+        self.embedding_length = self.sentence_transformer.config.hidden_size
 
     def forward(self, text: str | list[str]) -> torch.Tensor:
         inputs = self.tokenizer(
@@ -22,6 +22,6 @@ class SentenceTransformer(pl.LightningModule):
         )
         # Move input tensors to the same device as the model
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
-        outputs = self.model(**inputs)
+        outputs = self.sentence_transformer(**inputs)
         sentence_embedding = outputs.last_hidden_state.mean(dim=1)
         return sentence_embedding

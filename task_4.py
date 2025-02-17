@@ -21,18 +21,18 @@ def main():
         logger=pl.loggers.TensorBoardLogger(save_dir="logs", name=""),
         callbacks=[
             # Early stopping based on combined loss
-            EarlyStopping(monitor="train_combined_loss", patience=1),
+            EarlyStopping(monitor="val_combined_loss", patience=2),
             # Save best checkpoint for category task
             ModelCheckpoint(
                 dirpath=CHECKPOINTS_DIR,
-                filename="best-category-loss_{epoch:02d}_{train_category_loss:.3f}",
-                monitor="train_category_loss",
+                filename="best-category-loss_{epoch:02d}_{val_category_loss:.3f}",
+                monitor="val_category_loss",
             ),
             # Save best checkpoint for sentiment task
             ModelCheckpoint(
                 dirpath=CHECKPOINTS_DIR,
-                filename="best-sentiment-loss_{epoch:02d}_{train_sentiment_loss:.3f}",
-                monitor="train_sentiment_loss",
+                filename="best-sentiment-loss_{epoch:02d}_{val_sentiment_loss:.3f}",
+                monitor="val_sentiment_loss",
             ),
         ],
     )

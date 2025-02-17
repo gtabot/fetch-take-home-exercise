@@ -65,9 +65,15 @@ class MultitaskDataModule(pl.LightningDataModule):
         self.category_dataset = CategoryDataset(
             category_data["train"]["text"], category_data["train"]["label"]
         )
+        self.category_val_dataset = CategoryDataset(
+            category_data["test"]["text"], category_data["test"]["label"]
+        )
         sentiment_data = load_dataset(SENTIMENT_DATASET_NAME)
         self.sentiment_dataset = SentimentDataset(
             sentiment_data["train"]["text"], sentiment_data["train"]["label"]
+        )
+        self.sentiment_val_dataset = SentimentDataset(
+            sentiment_data["test"]["text"], sentiment_data["test"]["label"]
         )
 
     def train_dataloader(self) -> tuple[DataLoader, DataLoader]:
@@ -93,7 +99,7 @@ class MultitaskDataModule(pl.LightningDataModule):
             sampler=category_sampler,
             num_workers=self.num_workers,
             pin_memory=self.cuda_is_available,
-            persistent_workers=True,  # speed up the dataloader worker initialization
+            persistent_workers=True,
         )
         sentiment_dataloader = DataLoader(
             self.sentiment_dataset,
@@ -101,6 +107,23 @@ class MultitaskDataModule(pl.LightningDataModule):
             sampler=sentiment_sampler,
             num_workers=self.num_workers,
             pin_memory=self.cuda_is_available,
-            persistent_workers=True,  # speed up the dataloader worker initialization
+            persistent_workers=True,
         )
         return category_dataloader, sentiment_dataloader
+
+    def val_dataloader(self) -> tuple[DataLoader, DataLoader]:
+        category_val_loader = DataLoader(
+            self.category_val_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+            pin_memory=self.cuda_is_available,
+            persistent_workers=True,
+        )
+        sentiment_val_loader = DataLoader(
+            self.sentiment_val_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+            pin_memory=self.cuda_is_available,
+            persistent_workers=True,
+        )
+        return category_val_loader, sentiment_val_loader
