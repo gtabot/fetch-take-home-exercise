@@ -18,6 +18,9 @@ class MultitaskTransformer(SentenceTransformer):
         self.datamodule = datamodule
         self.hidden_dim = hidden_dim
         self.learning_rate = learning_rate
+        # Freeze the sentence transformer weights
+        for param in self.sentence_transformer.parameters():
+            param.requires_grad = False
         self.category_classifier = nn.Sequential(
             nn.Linear(self.embedding_length, hidden_dim),
             nn.ReLU(),
@@ -55,6 +58,26 @@ class MultitaskTransformer(SentenceTransformer):
         combined_loss = (category_loss + sentiment_loss) / 2
         self.log("train_combined_loss", combined_loss)
         return combined_loss
+
+    def validation_step(self, batch: dict[str, list[str] | torch.Tensor]) -> torch.Tensor:
+        category_batch, sentiment_batch = batch
+
+        try:
+            embeddings = super().forward(category_batch["text"])
+            category_logits = self.category_classifier(embeddings)
+            category_loss = self.loss_fn(category_logits, category_batch["label"])
+            self.log("val_category_loss", category_loss)
+                
+            embeddings = super().forward(sentiment_batch["text"])
+            sentiment_logits = self.sentiment_classifier(embeddings)
+            sentiment_loss = self.loss_fn(sentiment_logits, sentiment_batch["label"])
+            self.log("val_sentiment_loss", sentiment_loss)
+            
+            combined_loss = (category_loss + sentiment_loss) / 2
+            self.log("val_combined_loss", combined_loss)
+            return combined_loss
+        except Exception as e:
+            pass
 
     def predict_step(self, text: str | list[str]) -> dict[str, torch.Tensor | str]:
         output = self.forward(text)

@@ -2,6 +2,7 @@ import multiprocessing
 import pytorch_lightning as pl
 import torch
 from datasets import load_dataset
+from pytorch_lightning.utilities.combined_loader import CombinedLoader
 from torch.utils.data import DataLoader, Dataset, RandomSampler
 from typing import Optional
 
@@ -65,9 +66,15 @@ class MultitaskDataModule(pl.LightningDataModule):
         self.category_dataset = CategoryDataset(
             category_data["train"]["text"], category_data["train"]["label"]
         )
+        self.category_val_dataset = CategoryDataset(
+            category_data["test"]["text"], category_data["test"]["label"]
+        )
         sentiment_data = load_dataset(SENTIMENT_DATASET_NAME)
         self.sentiment_dataset = SentimentDataset(
             sentiment_data["train"]["text"], sentiment_data["train"]["label"]
+        )
+        self.sentiment_val_dataset = SentimentDataset(
+            sentiment_data["test"]["text"], sentiment_data["test"]["label"]
         )
 
     def train_dataloader(self) -> tuple[DataLoader, DataLoader]:
@@ -86,14 +93,13 @@ class MultitaskDataModule(pl.LightningDataModule):
                 replacement=True,
                 num_samples=len(self.sentiment_dataset),
             )
-        # Create dataloaders
         category_dataloader = DataLoader(
             self.category_dataset,
             batch_size=self.batch_size,
             sampler=category_sampler,
             num_workers=self.num_workers,
             pin_memory=self.cuda_is_available,
-            persistent_workers=True,  # speed up the dataloader worker initialization
+            persistent_workers=True,
         )
         sentiment_dataloader = DataLoader(
             self.sentiment_dataset,
@@ -101,6 +107,25 @@ class MultitaskDataModule(pl.LightningDataModule):
             sampler=sentiment_sampler,
             num_workers=self.num_workers,
             pin_memory=self.cuda_is_available,
-            persistent_workers=True,  # speed up the dataloader worker initialization
+            persistent_workers=True,
         )
-        return category_dataloader, sentiment_dataloader
+        return CombinedLoader(
+            iterables=(category_dataloader, sentiment_dataloader),
+            mode="max_size_cycle",  # stops when the longest loader is exhausted, while cycling through the shortest
+        )
+
+    def val_dataloader(self) -> tuple[DataLoader, DataLoader]:
+        category_val_loader = DataLoader(
+            self.category_val_dataset,
+            batch_size=self.batch_size,
+            pin_memory=self.cuda_is_available,
+        )
+        sentiment_val_loader = DataLoader(
+            self.sentiment_val_dataset,
+            batch_size=self.batch_size,
+            pin_memory=self.cuda_is_available,
+        )
+        return CombinedLoader(
+            iterables=(category_val_loader, sentiment_val_loader),
+            mode="min_size",  # stops when the shortest loader is exhausted
+        )

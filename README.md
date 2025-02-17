@@ -59,6 +59,9 @@ The file `models/multitask_transformer.py` contains the implementation of the mu
   - One for the category classification task
   - One for the sentiment classification task
 - The model uses a simple feedforward network for each head
+  - The feedforward network is two linear layers with a ReLU activation function
+  - ReLU is used to introduce non-linearity into the model
+  - The output of the feedforward network is a logit for each class
 - The model uses a cross-entropy loss function for each head and averages the two losses to derive a single combined loss
 - During forward pass, the model outputs a dictionary containing the embeddings and the logits for each head
 
@@ -113,14 +116,15 @@ I use the HuggingFace dataset [Sp1786/multiclass-sentiment-analysis-dataset](htt
 The file `task_4.py` contains the implementation of the training loop.
 
 - The datasets are loaded and prepared for training in `MultitaskDataModule`
+  - Separate training datasets are used for each task
   - Inequal dataset sizes are handled with random sampling to lengthen the shorter dataset
 - The datasets are used to instantiate the multi-task learning model and determine the number of classes for each task
 - The training loop is implemented using PyTorch Lightning
-  - Training will continue until the early stopping callback is triggered (no loss improvement)
+  - Training will continue until the early stopping callback is triggered (no combined loss improvement in validation set in 2 consecutive epochs)
   - The final model and other checkpoints are saved in the `checkpoints` directory (_ignored by_ `.gitignore` _due to large size_)
     - `final-multitask-transformer.ckpt`
-    - `best-category-loss_epoch={##}_loss={#.###}.ckpt`
-    - `best-sentiment-loss_epoch={##}_loss={#.###}.ckpt`
+    - `best-category-loss_epoch={##}_val_category_loss={#.###}.ckpt`
+    - `best-sentiment-loss_epoch={##}_val_sentiment_loss={#.###}.ckpt`
   - TensorBoard logs are saved in the `logs` directory
 
 ### Training the Multi-Task Learning Model
@@ -135,12 +139,12 @@ LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 
   | Name                 | Type       | Params | Mode
 ------------------------------------------------------------
-0 | model                | BertModel  | 22.7 M | eval
+0 | sentence_transformer | BertModel  | 22.7 M | eval
 1 | category_classifier  | Sequential | 99.3 K | train
 2 | sentiment_classifier | Sequential | 99.3 K | train
 ------------------------------------------------------------
-22.9 M    Trainable params
-0         Non-trainable params
+198 K     Trainable params
+22.7 M    Non-trainable params
 22.9 M    Total params
 91.648    Total estimated model params size (MB)
 8         Modules in train mode

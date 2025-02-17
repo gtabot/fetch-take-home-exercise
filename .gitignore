@@ -3,4 +3,5 @@
 *.egg-info/
 *.pyc
 __pycache__/
-venv/
+.venv/
+poetry.lock
