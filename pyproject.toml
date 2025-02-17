@@ -1,15 +1,23 @@
-[project]
+[tool.poetry]
 name = "gtabot-fetch-take-home-exercise"
 version = "2025.02.17"
-authors = [
-    { name = "Gregg Tabot" },
-]
+authors = ["Gregg Tabot <gregg.tabot@gmail.com>"]
 description = "Machine Learning Engineer Take Home Exercise"
 readme = "README.md"
-requires-python = ">=3.9"
-dependencies = [
-    "torch",
-    "pytorch-lightning",
-    "transformers",
-    "datasets",
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+datasets = "*"
+pytorch-lightning = "*"
+tensorboard = "*"
+torch = [
+    {platform = "darwin", version = "*"},  # macOS uses CPU-only
+    {platform = "linux", version = "*", source = "torch-cuda"},
+    {platform = "win32", version = "*", source = "torch-cuda"},
 ]
+transformers = "*"
+
+[[tool.poetry.source]]
+name = "torch-cuda"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "explicit"
