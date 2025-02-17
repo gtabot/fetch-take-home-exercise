@@ -165,7 +165,7 @@ The file `task_5.py` contains evaluation for the multi-task learning model.
 $ python task_5.py
 
 Sentence: I absolutely love this new restaurant, the food is amazing!
-Category: imperative
+Category: declarative
 Sentiment: positive
 ...
 ```
