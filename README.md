@@ -117,7 +117,7 @@ The file `task_4.py` contains the implementation of the training loop.
 - The datasets are used to instantiate the multi-task learning model and determine the number of classes for each task
 - The training loop is implemented using PyTorch Lightning
   - Training will continue until the early stopping callback is triggered (no loss improvement)
-  - The final model and other checkpoints are saved in the `checkpoints` directory (ignored by `.gitignore`)
+  - The final model and other checkpoints are saved in the `checkpoints` directory (_ignored by_ `.gitignore` _due to large size_)
     - `final-multitask-transformer.ckpt`
     - `best-category-loss_epoch={##}_loss={#.###}.ckpt`
     - `best-sentiment-loss_epoch={##}_loss={#.###}.ckpt`
